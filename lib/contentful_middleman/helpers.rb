@@ -9,7 +9,11 @@ module ContentfulMiddleman
     def localize_entry(entry, locale, fallback_locale='en-US')
       localized_entry = {}
       entry.each do |field, value|
-        localized_entry[field] = localize(entry, field, locale, fallback_locale)
+        if field == '_meta'
+          localized_entry[field] = value
+        else
+          localized_entry[field] = localize(entry, field, locale, fallback_locale)
+        end
       end
       localized_entry
     end
